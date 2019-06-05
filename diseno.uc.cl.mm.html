@@ -1,0 +1,1395 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>diseno.uc.cl</title>
+<style type="text/css">
+    li { list-style: none;  margin: 0; }
+    p { margin: 0; }
+    span.foldopened { color: white; font-size: xx-small;
+    border-width: 1; font-family: monospace; padding: 0em 0.25em 0em 0.25em; background: #e0e0e0;
+    VISIBILITY: visible;
+    cursor:pointer; }
+
+
+    span.foldclosed { color: #666666; font-size: xx-small;
+    border-width: 1; font-family: monospace; padding: 0em 0.25em 0em 0.25em; background: #e0e0e0;
+    VISIBILITY: hidden;
+    cursor:pointer; }
+
+    span.foldspecial { color: #666666; font-size: xx-small; border-style: none solid solid none;
+    border-color: #CCCCCC; border-width: 1; font-family: sans-serif; padding: 0em 0.1em 0em 0.1em; background: #e0e0e0;
+    cursor:pointer; }
+
+    span.l { color: red; font-weight: bold; }
+
+    a.mapnode:link {text-decoration: none; color: black; }
+    a.mapnode:visited {text-decoration: none; color: black; }
+    a.mapnode:active {text-decoration: none; color: black; }
+    a.mapnode:hover {text-decoration: none; color: black; background: #eeeee0; }
+
+</style>
+<!-- ^ Position is not set to relative / absolute here because of Mozilla -->
+</head>
+<body>
+
+<script type="text/javascript">
+   // Here we implement folding. It works fine with MSIE5.5, MSIE6.0 and
+   // Mozilla 0.9.6.
+
+   if (document.layers) {
+      //Netscape 4 specific code
+      pre = 'document.';
+      post = ''; }
+   if (document.getElementById) {
+      //Netscape 6 specific code
+      pre = 'document.getElementById("';
+      post = '").style'; }
+   if (document.all) {
+      //IE4+ specific code
+      pre = 'document.all.';
+      post = '.style'; }
+
+function layer_exists(layer) {
+   try {
+      eval(pre + layer + post);
+      return true; }
+   catch (error) {
+      return false; }}
+
+function show_layer(layer) {
+   eval(pre + layer + post).position = 'relative'; 
+   eval(pre + layer + post).visibility = 'visible'; }
+
+function hide_layer(layer) {
+   eval(pre + layer + post).visibility = 'hidden';
+   eval(pre + layer + post).position = 'absolute'; }
+
+function hide_folder(folder) {
+    hide_folding_layer(folder)
+    show_layer('show'+folder);
+
+    scrollBy(0,0); // This is a work around to make it work in Browsers (Explorer, Mozilla)
+}
+
+function show_folder(folder) {
+    // Precondition: all subfolders are folded
+
+    show_layer('hide'+folder);
+    hide_layer('show'+folder);
+    show_layer('fold'+folder);
+
+    scrollBy(0,0); // This is a work around to make it work in Browsers (Explorer, Mozilla)
+
+    var i;
+    for (i=1; layer_exists('fold'+folder+'_'+i); ++i) {
+       show_layer('show'+folder+'_'+i); }
+}
+function show_folder_completely(folder) {
+    // Precondition: all subfolders are folded
+
+    show_layer('hide'+folder);
+    hide_layer('show'+folder);
+    show_layer('fold'+folder);
+
+    scrollBy(0,0); // This is a work around to make it work in Browsers (Explorer, Mozilla)
+
+    var i;
+    for (i=1; layer_exists('fold'+folder+'_'+i); ++i) {
+       show_folder_completely(folder+'_'+i); }
+}
+
+
+
+function hide_folding_layer(folder) {
+   var i;
+   for (i=1; layer_exists('fold'+folder+'_'+i); ++i) {
+       hide_folding_layer(folder+'_'+i); }
+
+   hide_layer('hide'+folder);
+   hide_layer('show'+folder);
+   hide_layer('fold'+folder);
+
+   scrollBy(0,0); // This is a work around to make it work in Browsers (Explorer, Mozilla)
+}
+
+function fold_document() {
+   var i;
+   var folder = '1';
+   for (i=1; layer_exists('fold'+folder+'_'+i); ++i) {
+       hide_folder(folder+'_'+i); }
+}
+
+function unfold_document() {
+   var i;
+   var folder = '1';
+   for (i=1; layer_exists('fold'+folder+'_'+i); ++i) {
+       show_folder_completely(folder+'_'+i); }
+}
+
+</script>
+<SPAN class="foldspecial" onclick="fold_document()">All +</SPAN>
+<SPAN class="foldspecial" onclick="unfold_document()">All -</SPAN>
+<p>diseno.uc.cl
+<ul><li><span id="show1_1" class="foldclosed" onClick="show_folder('1_1')" style="POSITION: absolute">+</span> <span id="hide1_1" class="foldopened" onClick="hide_folder('1_1')">-</span>
+Estudiar en dise&#241;o UC
+<ul id="fold1_1" style="POSITION: relative; VISIBILITY: visible;"><li>Experiencia UC
+
+</li>
+<li><span id="show1_1_1" class="foldclosed" onClick="show_folder('1_1_1')" style="POSITION: absolute">+</span> <span id="hide1_1_1" class="foldopened" onClick="hide_folder('1_1_1')">-</span>
+Personas
+<ul id="fold1_1_1" style="POSITION: relative; VISIBILITY: visible;"><li>Direcci&#243;n
+<ul><li>Mario Ubilla
+
+</li>
+<li>Rodrigo Ramirez 
+
+</li>
+<li>Andr&#233;s Villela
+
+</li>
+<li>Constanza Almarza
+
+</li>
+<li>Paula Wuth
+
+</li>
+
+</ul>
+</li>
+<li>Administrativos
+<ul><li>Pilar Rodriguez
+
+</li>
+<li>Mariana P&#233;rez
+
+</li>
+<li>Carolina Salazar
+
+</li>
+<li>Constanza Diez
+
+</li>
+<li>Daniela Bianchi
+
+</li>
+<li>Paola Olgu&#237;n
+
+</li>
+<li>Omar Fa&#250;ndez
+
+</li>
+<li>Claudia Saez
+
+</li>
+<li>Lilian Bast&#237;as
+
+</li>
+
+</ul>
+</li>
+<li><span id="show1_1_1_1" class="foldclosed" onClick="show_folder('1_1_1_1')" style="POSITION: absolute">+</span> <span id="hide1_1_1_1" class="foldopened" onClick="hide_folder('1_1_1_1')">-</span>
+Docentes
+<ul id="fold1_1_1_1" style="POSITION: relative; VISIBILITY: visible;"><li>Elena Alfaro
+
+</li>
+<li>Jos&#233; Manuel Allard
+
+</li>
+<li>Constanza Almarza 
+
+</li>
+<li>Pedro &#193;lvarez 
+
+</li>
+<li>Luis Sanhueza
+
+</li>
+<li>Renato Bernasconi
+
+</li>
+<li>Javier Cancino
+
+</li>
+<li>Lina C&#225;rdenas
+
+</li>
+<li>Iv&#225;n Caro
+
+</li>
+<li>Marcos Chilet 
+
+</li>
+<li>Erik Ciravegna
+
+</li>
+<li>Jorge Cort&#233;s 
+
+</li>
+<li>Felipe Cortez
+
+</li>
+<li>Paz Cox 
+
+</li>
+<li>Rodrigo Culagovski
+
+</li>
+<li>Tom&#225;s de Iruarrizaga
+
+</li>
+<li>Florencia de la Carrera
+
+</li>
+<li>Patricia de los R&#237;os 
+
+</li>
+<li>Alejandro Dur&#225;n 
+
+</li>
+<li>Crist&#243;bal Edwards
+
+</li>
+<li>Gabriela Far&#237;as 
+
+</li>
+<li>Bernardita Figueroa
+
+</li>
+<li>Francisco G&#225;lvez 
+
+</li>
+<li>Manuela Garret&#243;n 
+
+</li>
+<li>Alberto Gonz&#225;lez 
+
+</li>
+<li>Justine Graham 
+
+</li>
+<li>Catalina Harasic
+
+</li>
+<li>Pablo Hermansen
+
+</li>
+<li>Soledad Hoces de la Guardia 
+
+</li>
+<li>Oscar Huerta
+
+</li>
+<li>Mar&#237;a Bego&#241;a Julia
+
+</li>
+<li>Bel&#233;n la Rivera
+
+</li>
+<li>Douglas Leonard 
+
+</li>
+<li>Patricia Manns 
+
+</li>
+<li>Katherine Mollenhauer
+
+</li>
+<li>Federico Monroy 
+
+</li>
+<li>Denise Montt
+
+</li>
+<li>Gerardo Mora
+
+</li>
+<li>Paola Moreno 
+
+</li>
+<li>Sebasti&#225;n Negrete
+
+</li>
+<li>Jos&#233; Neira
+
+</li>
+<li>Marcela Parada
+
+</li>
+<li>Patricio Pozo
+
+</li>
+<li>Mercedes Rico 
+
+</li>
+<li>Nicol&#225;s Robertson 
+
+</li>
+<li>Celina Rodr&#237;guez
+
+</li>
+<li>Caros Sfeir
+
+</li>
+<li>Zinnia Silva 
+
+</li>
+<li>&#193;lvaro Sylleros
+
+</li>
+<li>Mart&#237;n Tironi
+
+</li>
+<li>Ximena Ulibarri
+
+</li>
+<li>Sergio Valderrama 
+
+</li>
+<li>Ricardo Vega 
+
+</li>
+<li>Tom&#225;s Vivanco
+
+</li>
+<li>Samanta Zeppelin
+
+</li>
+<li>Carola Zurob
+
+</li>
+
+</ul>
+</li>
+<li>Invitados
+
+</li>
+
+</ul>
+</li>
+<li><span id="show1_1_2" class="foldclosed" onClick="show_folder('1_1_2')" style="POSITION: absolute">+</span> <span id="hide1_1_2" class="foldopened" onClick="hide_folder('1_1_2')">-</span>
+Infraestructura
+<ul id="fold1_1_2" style="POSITION: relative; VISIBILITY: visible;"><li>Edificio escuela de dise&#241;o
+
+</li>
+<li>Biblioteca Lo Contador 
+
+</li>
+<li>Laboratorio de Herramientas
+
+</li>
+<li>Laboratorio Textil Paulina Brougnoli 
+
+</li>
+<li>Laboratorio de computaci&#243;n
+
+</li>
+<li>Laboratorio de Iluminaci&#243;n
+
+</li>
+<li>Laboratorio de Impresi&#243;n Gr&#225;fica 
+
+</li>
+<li>Laboratorio Fabhaus
+
+</li>
+<li>Photoraphic Laboratory
+
+</li>
+
+</ul>
+</li>
+<li>Postulaci&#243;n
+
+</li>
+<li><span id="show1_1_3" class="foldclosed" onClick="show_folder('1_1_3')" style="POSITION: absolute">+</span> <span id="hide1_1_3" class="foldopened" onClick="hide_folder('1_1_3')">-</span>
+Open day
+<ul id="fold1_1_3" style="POSITION: relative; VISIBILITY: visible;"><li><span id="show1_1_3_1" class="foldclosed" onClick="show_folder('1_1_3_1')" style="POSITION: absolute">+</span> <span id="hide1_1_3_1" class="foldopened" onClick="hide_folder('1_1_3_1')">-</span>
+Octava versi&#243;n / 2018-2
+<ul id="fold1_1_3_1" style="POSITION: relative; VISIBILITY: visible;"><li>Programaci&#243;n 
+
+</li>
+<li>Expositores 
+
+</li>
+<li>Mapa 
+
+</li>
+
+</ul>
+</li>
+<li><span id="show1_1_3_2" class="foldclosed" onClick="show_folder('1_1_3_2')" style="POSITION: absolute">+</span> <span id="hide1_1_3_2" class="foldopened" onClick="hide_folder('1_1_3_2')">-</span>
+S&#233;ptima versi&#243;n / 2018-1
+<ul id="fold1_1_3_2" style="POSITION: relative; VISIBILITY: visible;"><li>Programaci&#243;n
+
+</li>
+<li>Expositores 
+
+</li>
+<li>Mapa 
+
+</li>
+<li>Galer&#237;a
+
+</li>
+
+</ul>
+</li>
+<li><span id="show1_1_3_3" class="foldclosed" onClick="show_folder('1_1_3_3')" style="POSITION: absolute">+</span> <span id="hide1_1_3_3" class="foldopened" onClick="hide_folder('1_1_3_3')">-</span>
+Sexta versi&#243;n / 2017-2
+<ul id="fold1_1_3_3" style="POSITION: relative; VISIBILITY: visible;"><li>Programaci&#243;n 
+
+</li>
+<li>Expositores 
+
+</li>
+<li>Mapa
+
+</li>
+<li>Galer&#237;a
+
+</li>
+
+</ul>
+</li>
+<li><span id="show1_1_3_4" class="foldclosed" onClick="show_folder('1_1_3_4')" style="POSITION: absolute">+</span> <span id="hide1_1_3_4" class="foldopened" onClick="hide_folder('1_1_3_4')">-</span>
+Quinta versi&#243;n / 2017 -1
+<ul id="fold1_1_3_4" style="POSITION: relative; VISIBILITY: visible;"><li>Programaci&#243;n 
+
+</li>
+<li>Expositores
+
+</li>
+<li>Mapa
+
+</li>
+<li>Galer&#237;a
+
+</li>
+
+</ul>
+</li>
+<li><span id="show1_1_3_5" class="foldclosed" onClick="show_folder('1_1_3_5')" style="POSITION: absolute">+</span> <span id="hide1_1_3_5" class="foldopened" onClick="hide_folder('1_1_3_5')">-</span>
+Cuarta versi&#243;n / 2016-2
+<ul id="fold1_1_3_5" style="POSITION: relative; VISIBILITY: visible;"><li>Programaci&#243;n 
+
+</li>
+<li>Expositores 
+
+</li>
+<li>Mapa
+
+</li>
+<li>Galer&#237;a
+
+</li>
+
+</ul>
+</li>
+<li><span id="show1_1_3_6" class="foldclosed" onClick="show_folder('1_1_3_6')" style="POSITION: absolute">+</span> <span id="hide1_1_3_6" class="foldopened" onClick="hide_folder('1_1_3_6')">-</span>
+Tercera versi&#243;n / 2016-1
+<ul id="fold1_1_3_6" style="POSITION: relative; VISIBILITY: visible;"><li>Programaci&#243;n 
+
+</li>
+<li>Expositores 
+
+</li>
+<li>Mapa
+
+</li>
+<li>Galer&#237;a
+
+</li>
+
+</ul>
+</li>
+<li><span id="show1_1_3_7" class="foldclosed" onClick="show_folder('1_1_3_7')" style="POSITION: absolute">+</span> <span id="hide1_1_3_7" class="foldopened" onClick="hide_folder('1_1_3_7')">-</span>
+Segunda versi&#243;n /2015-2
+<ul id="fold1_1_3_7" style="POSITION: relative; VISIBILITY: visible;"><li>Programaci&#243;n 
+
+</li>
+<li>Expositores
+
+</li>
+<li>Mapa
+
+</li>
+<li>Galer&#237;a
+
+</li>
+
+</ul>
+</li>
+<li><span id="show1_1_3_8" class="foldclosed" onClick="show_folder('1_1_3_8')" style="POSITION: absolute">+</span> <span id="hide1_1_3_8" class="foldopened" onClick="hide_folder('1_1_3_8')">-</span>
+Primera versi&#243;n / 2015-1
+<ul id="fold1_1_3_8" style="POSITION: relative; VISIBILITY: visible;"><li>Programaci&#243;n 
+
+</li>
+<li>Expositores 
+
+</li>
+<li>Mapa 
+
+</li>
+<li>Galer&#237;a 
+
+</li>
+<li>Video
+
+</li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+<li><span id="show1_1_4" class="foldclosed" onClick="show_folder('1_1_4')" style="POSITION: absolute">+</span> <span id="hide1_1_4" class="foldopened" onClick="hide_folder('1_1_4')">-</span>
+Ofertas laborales
+<ul id="fold1_1_4" style="POSITION: relative; VISIBILITY: visible;"><li>GOLD
+
+</li>
+<li>PM200
+
+</li>
+<li>Workietalkie
+
+</li>
+<li>Tekpro
+
+</li>
+<li>Entrekids_2
+
+</li>
+<li>BrionesUndurraga
+
+</li>
+<li>Vestu&#225;
+
+</li>
+
+</ul>
+</li>
+<li>Contacto
+
+</li>
+
+</ul>
+</li>
+<li>Programas Acad&#233;micos
+<ul><li>Pregrado
+<ul><li>Perfil de Egreso
+
+</li>
+<li><span id="show1_2" class="foldclosed" onClick="show_folder('1_2')" style="POSITION: absolute">+</span> <span id="hide1_2" class="foldopened" onClick="hide_folder('1_2')">-</span>
+Malla Curricular
+<ul id="fold1_2" style="POSITION: relative; VISIBILITY: visible;"><li>Introducci&#243;n al proyecto
+
+</li>
+<li>Intro al Dise&#241;o
+
+</li>
+<li>Representaci&#243;n 
+
+</li>
+<li>Laboratorio de Modelos y Prototipos
+
+</li>
+<li>Geometr&#237;a
+
+</li>
+<li>Historia del Dise&#241;o
+
+</li>
+<li>Curso Antropol&#243;gico &#201;tico
+
+</li>
+<li>Electivo en otra disciplina 
+
+</li>
+<li>Identidad
+
+</li>
+<li>Comunicaci&#243;n al Proyecto
+
+</li>
+<li>Teor&#237;a y Procesos Psicol&#243;gicos
+
+</li>
+<li>Electivo en otra disciplina
+
+</li>
+<li>Electivo en otra disciplina
+
+</li>
+<li>Producto
+
+</li>
+<li>Ergonom&#237;a
+
+</li>
+<li>Teor&#237;a de la comunicaci&#243;n
+
+</li>
+<li>Curso teol&#243;gico
+
+</li>
+<li>Electivo en otra disciplina
+
+</li>
+<li>Taller: Calidad I
+
+</li>
+<li>Estructuras y Materiales
+
+</li>
+<li>Introducci&#243;n a la Econom&#237;a 
+
+</li>
+<li>Optativo de Profundizaci&#243;n 
+
+</li>
+<li>Electivo en otra disciplina
+
+</li>
+<li>Taller: Calidad II 
+
+</li>
+<li>T&#243;picos para emprender: Marketing y servicios 
+
+</li>
+<li>Optativo de Profundizaci&#243;n 
+
+</li>
+<li>Electivo en otra disciplina 
+
+</li>
+<li>Taller: Mercado I
+
+</li>
+<li>Dise&#241;o de Informaci&#243;n 
+
+</li>
+<li>Dise&#241;o e Impacto Ambiental 
+
+</li>
+<li>Desaf&#237;o en la creaci&#243;n de empresas 
+
+</li>
+<li>Taller: Mercado II
+
+</li>
+<li>Pr&#225;ctica Profesional Oficina
+
+</li>
+<li>Teor&#237;as, estrategias y m&#233;todos de la investigaci&#243;n aplicados al dise&#241;o 
+
+</li>
+<li>Optativo de profundizaci&#243;n 
+
+</li>
+<li>Pr&#225;ctica Profesional Servicio 
+
+</li>
+<li>Optativo de Profundizaci&#243;n 
+
+</li>
+<li>Optativo de profundizaci&#243;n 
+
+</li>
+<li>Taler de titulaci&#243;n 
+
+</li>
+<li>Optativo de profundizaci&#243;n 
+
+</li>
+<li>Optativo de profundizaci&#243;n 
+
+</li>
+
+</ul>
+</li>
+<li>Titulaci&#243;n 
+<ul><li>Instructivo_Seminario de T&#237;tulo (versi&#243;n 2019)
+
+</li>
+<li>Reglamento de titulaci&#243;n )versi&#243;n 2019)
+
+</li>
+
+</ul>
+</li>
+<li><span id="show1_3" class="foldclosed" onClick="show_folder('1_3')" style="POSITION: absolute">+</span> <span id="hide1_3" class="foldopened" onClick="hide_folder('1_3')">-</span>
+Cursos Optativos 
+<ul id="fold1_3" style="POSITION: relative; VISIBILITY: visible;"><li>Iluminaci&#243;n 
+
+</li>
+<li>Manejo y aplicaci&#243;n del color 
+
+</li>
+<li>Fotograf&#237;a hoy 
+
+</li>
+<li>Design Sketching
+
+</li>
+<li>Dise&#241;o y nuevos medios 
+
+</li>
+<li>Del plano al volumen textil 
+
+</li>
+<li>Pensar la artesan&#237;a, bases para la comprensi&#243;n y acci&#243;n 
+
+</li>
+<li>Ilustraci&#243;n creativa 
+
+</li>
+<li>Tipograf&#237;a y diagramaci&#243;n 
+
+</li>
+<li>Design bootcamp: herramientas y m&#233;todos pr&#225;cticos para innovar 
+
+</li>
+<li>Introducci&#243;n al dise&#241;o de packaging 
+
+</li>
+<li>Urban Hacking: de las smarts cities a los smarts citizens 
+
+</li>
+<li>Introducci&#243;n a la tipograf&#237;a 
+
+</li>
+<li>Dise&#241;o y manufactura diggital cad/cam 
+
+</li>
+<li>Sistemas de configuraci&#243;n desde el textil 
+
+</li>
+<li>Materiales y combinaciones crm&#225;ticas en la industria del dise&#241;o
+
+</li>
+<li>Media Lab
+
+</li>
+<li>Gesti&#243;n de Dise&#241;o
+
+</li>
+<li>Nuevas tendencias en el dise&#241;o de Carteles
+
+</li>
+<li>Dise&#241;o por Computaci&#243;n 
+
+</li>
+<li>Dise&#241;o y nuevas tendencias de la audiovisualidad contempor&#225;nea 
+
+</li>
+<li>Imagen del producto textil
+
+</li>
+<li>Historia de la indumentaria
+
+</li>
+
+</ul>
+</li>
+<li>Pr&#225;cticas
+
+</li>
+
+</ul>
+</li>
+<li><span id="show1_4" class="foldclosed" onClick="show_folder('1_4')" style="POSITION: absolute">+</span> <span id="hide1_4" class="foldopened" onClick="hide_folder('1_4')">-</span>
+Postgrado
+<ul id="fold1_4" style="POSITION: relative; VISIBILITY: visible;"><li>Magister en Dise&#241;o Avanzado
+<ul><li>Misi&#243;n 
+
+</li>
+<li>Curriculum
+
+</li>
+<li>Postulaci&#243;n 
+
+</li>
+<li>Malla articulaci&#243;n_MADA UC_2018
+
+</li>
+<li>malla_MADA UC_2018
+
+</li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+<li>Malla Curricular
+
+</li>
+<li>Pr&#225;cticas
+
+</li>
+
+</ul>
+</li>
+<li>Investigaci&#243;n, Desarrollo y Transferencias
+<ul><li>&#193;rea investigaci&#243;n
+<ul><li>Qui&#233;nes somos
+
+</li>
+<li>Objetivos 
+
+</li>
+<li>Publicaciones Escuela de Dise&#241;o
+<ul><li>Descarga: Libro Bienal de Dise&#241;o 2017
+
+</li>
+<li>Descarga: Anuario Escuela DNO 2015
+
+</li>
+<li>Descarga: Dise&#241;os para la Emergencia 
+
+</li>
+<li>Descarga: Ciudades en Beta
+
+</li>
+<li>Descarga: Caminar, pedalear y conducir 
+
+</li>
+<li>Descarga: Nuevos servicios para usuarios con experiencia
+
+</li>
+<li>Descarga: Anuario Escuela DNO 2014
+
+</li>
+<li>Descarga: 12 a&#241;os del DET
+
+</li>
+<li>Descarga: Anuario Escuela DNO 2013 
+
+</li>
+<li>Descarga: Historial escudo UC 1888-2013
+
+</li>
+<li>Descarga Anuario Escuela DNO 2012
+
+</li>
+
+</ul>
+</li>
+<li>Cifras
+
+</li>
+
+</ul>
+</li>
+<li><span id="show1_5" class="foldclosed" onClick="show_folder('1_5')" style="POSITION: absolute">+</span> <span id="hide1_5" class="foldopened" onClick="hide_folder('1_5')">-</span>
+L&#237;neas de Investigaci&#243;n 
+<ul id="fold1_5" style="POSITION: relative; VISIBILITY: visible;"><li>Artesan&#237;a UC
+
+</li>
+<li>Dise&#241;o audiovisual y nuevos medios 
+
+</li>
+<li>Historia y cultura del dise&#241;o 
+
+</li>
+<li>Dise&#241;o y estudios de color 
+
+</li>
+<li>Dise&#241;o de interacci&#243;n e interfaces 
+
+</li>
+<li>Dise&#241;o Sustentable 
+
+</li>
+<li>Dise&#241;o gr&#225;fico y comunicaci&#243;n visual 
+
+</li>
+<li>Dise&#241;o para el emprendimiento y la innovaci&#243;n 
+
+</li>
+<li>Dise&#241;o para la educaci&#243;n 
+
+</li>
+<li>Fabricaci&#243;n digital 
+
+</li>
+<li>Dise&#241;o de sistemas de productos y equipamiento 
+
+</li>
+<li>Dise&#241;o de iluminaci&#243;n
+
+</li>
+<li>Dise&#241;o de servicios 
+
+</li>
+<li>Dise&#241;o, cultura y tecnolog&#237;as textiles 
+
+</li>
+<li>Dise&#241;o y ergonom&#237;a
+
+</li>
+<li>Visualizaci&#243;n y controversias 
+
+</li>
+
+</ul>
+</li>
+<li><span id="show1_6" class="foldclosed" onClick="show_folder('1_6')" style="POSITION: absolute">+</span> <span id="hide1_6" class="foldopened" onClick="hide_folder('1_6')">-</span>
+Prersentaciones 
+<ul id="fold1_6" style="POSITION: relative; VISIBILITY: visible;"><li>Workshops y congresos 
+
+</li>
+<li>Encuentro DNO UC
+
+</li>
+
+</ul>
+</li>
+<li><span id="show1_7" class="foldclosed" onClick="show_folder('1_7')" style="POSITION: absolute">+</span> <span id="hide1_7" class="foldopened" onClick="hide_folder('1_7')">-</span>
+Publicaciones 
+<ul id="fold1_7" style="POSITION: relative; VISIBILITY: visible;"><li>Dise&#241;a
+
+</li>
+<li>Libros y cap&#237;tulos de libros 
+
+</li>
+<li>Art&#237;culos 
+
+</li>
+
+</ul>
+</li>
+<li><span id="show1_8" class="foldclosed" onClick="show_folder('1_8')" style="POSITION: absolute">+</span> <span id="hide1_8" class="foldopened" onClick="hide_folder('1_8')">-</span>
+Proyectos adjudicados
+<ul id="fold1_8" style="POSITION: relative; VISIBILITY: visible;"><li>Proyectos de Desarrollo Acad&#233;mico 
+
+</li>
+<li>Proyectos de investigaci&#243;n B&#225;sica y aplicada 
+
+</li>
+<li>Proyectos de asistencia t&#233;cnica y servicios 
+
+</li>
+<li>Proyectos de Difusi&#243;n
+
+</li>
+
+</ul>
+</li>
+<li>Material de consulta 
+<ul><li>Revistas acad&#233;micas
+
+</li>
+<li>Convocatoria a congresos 
+
+</li>
+<li>Editoriales especializadas 
+
+</li>
+<li>Recursos en L&#237;nea
+
+</li>
+<li>Recursos f&#237;sicos 
+
+</li>
+
+</ul>
+</li>
+<li><span id="show1_9" class="foldclosed" onClick="show_folder('1_9')" style="POSITION: absolute">+</span> <span id="hide1_9" class="foldopened" onClick="hide_folder('1_9')">-</span>
+Fondos Concursables
+<ul id="fold1_9" style="POSITION: relative; VISIBILITY: visible;"><li>Etc
+
+</li>
+<li>Etc
+
+</li>
+<li>Etc
+
+</li>
+<li>Etc
+
+</li>
+<li>Etc
+
+</li>
+<li>etc
+
+</li>
+<li>etc
+
+</li>
+<li>etc
+
+</li>
+<li>etc
+
+</li>
+<li>etc
+
+</li>
+<li>etc
+
+</li>
+<li>etc
+
+</li>
+<li>etc
+
+</li>
+<li>etc
+
+</li>
+<li>etc
+
+</li>
+<li>etc
+
+</li>
+<li>etc
+
+</li>
+<li>etc
+
+</li>
+<li>etc
+
+</li>
+<li>etc
+
+</li>
+<li>etc
+
+</li>
+<li>etc
+
+</li>
+<li>etc
+
+</li>
+<li>etc
+
+</li>
+
+</ul>
+</li>
+<li><span id="show1_10" class="foldclosed" onClick="show_folder('1_10')" style="POSITION: absolute">+</span> <span id="hide1_10" class="foldopened" onClick="hide_folder('1_10')">-</span>
+Noticias de Investigaci&#243;n 
+<ul id="fold1_10" style="POSITION: relative; VISIBILITY: visible;"><li>Convocatoria Dise&#241;a 16
+
+</li>
+<li>Proyecto Coexitencia y afectividad entre humanos y no humanos 
+
+</li>
+<li>conferencia monolith controversies 
+
+</li>
+<li>visualizaci&#243;n siedu 
+
+</li>
+<li>Jornada ECIM
+
+</li>
+<li>Charla / Moda al paso 
+
+</li>
+<li>Call for papers SBE 2019 Temuco
+
+</li>
+<li>Ponencia Soledad Hoces de la GUardia 
+
+</li>
+<li>Charla Moda al Paso 
+
+</li>
+<li>Convocatoria Tesistas 
+
+</li>
+<li>Concurso Vicerrectoria de Investigaci&#243;n II
+
+</li>
+<li>Alianza Taller Lowtech
+
+</li>
+<li>Seminario la bauhaus y latinoam&#233;rica 
+
+</li>
+<li>Proyecyo investigaci&#243;n semilla fadeu 
+
+</li>
+<li>Fondecyt 2019 Alonso Palmarola rojo 
+
+</li>
+<li>Publicaci&#243;n Mart&#237;n Tironi
+
+</li>
+<li>Presentaci&#243;n Proyecto Filt
+
+</li>
+<li>Premio Investiaci&#243;n Dise&#241;o BID 18
+
+</li>
+<li>Exposici&#243;n Trayectorias de un panel 
+
+</li>
+<li>Presentaci&#243;n choreographies 
+
+</li>
+<li>Celebraci&#243;n 50 A&#241;os UC
+
+</li>
+<li>Potencias Smart Cities
+
+</li>
+<li>Exposici&#243;n "Ficci&#243;n en imaginario del dise&#241;o"
+
+</li>
+<li>Exposici&#243;n el trolley 
+
+</li>
+<li>Call for papers: more than human prototyping as pedagogical impugnation 
+
+</li>
+<li>taller representaci&#243;n andinos 
+
+</li>
+<li>seleccionados BID 2018
+
+</li>
+<li>Inauuraci&#243;n ofrendas de fe
+
+</li>
+<li>Resultado /investigaci&#243;n aplicada 
+
+</li>
+<li>terreno ivestigaci&#243;n textiles topater 
+
+</li>
+<li>call for papers econom&#237;a creativa (m&#233;xico)
+
+</li>
+<li>Propuesta / tracik conferencia 
+
+</li>
+<li>exposici&#243;n / museo del hongo 
+
+</li>
+<li>articulo /respuesta 
+
+</li>
+<li>bid/ investigaci&#243;n y dise&#241;o 
+
+</li>
+<li>Charla / baldosas de santiago 
+
+</li>
+<li>viaje / puerto williams 
+
+</li>
+<li>participaci&#243;n / cimode 2018
+
+</li>
+<li>organizaci&#243;n / fondecyt 
+
+</li>
+<li>participaci&#243;n / uc propone 
+
+</li>
+<li>taller / guemil 
+
+</li>
+<li>participaci&#243;n / charla university of london
+
+</li>
+<li>ponencia / hospitalar 2018
+
+</li>
+<li>presentaci&#243;n /propuestas MIM 
+
+</li>
+<li>Ponencia/CIMODE 2018
+
+</li>
+<li>Estudiio /evasi&#243;n transantiago
+
+</li>
+<li>charla/ historia de l infograf&#237;a en Chile 
+
+</li>
+<li>charla/ historia de los esp&#233;cimenes tipogr&#225;ficos 
+
+</li>
+<li>publicaci&#243;n Nicole Cristi 
+
+</li>
+<li>Rergistro Visdatos 
+
+</li>
+<li>Charla Menos es aburrido 
+
+</li>
+<li>Fondo proyectos VRI
+
+</li>
+<li>Charla / Historia de la infograf&#237;a en Chile 
+
+</li>
+<li>Adjudicaci&#243;n / FONDEDOC
+
+</li>
+<li>Participaci&#243;n Seminario 
+
+</li>
+<li>Exposici&#243;n KTH Suecia 
+
+</li>
+<li>Charla historia de los espec&#237;menes tipogr&#225;ficos (S XVII-XX)
+
+</li>
+<li>Charla menos es aburrido 
+
+</li>
+<li>Proyecto puesta en valor colecci&#243;n &nbsp;textiles topater
+
+</li>
+<li>proyecto investigaci&#243;n textiles topater 
+
+</li>
+<li>2ndo encuentro de investgaci&#243;n y proyectios dise&#241;o UC
+
+</li>
+<li>articulos packaing 
+
+</li>
+<li>lanzamiento dise&#241;o nacional 
+
+</li>
+<li>Fondart Econom&#237;a Circular Textil 
+
+</li>
+<li>Fondart Proyecto de investigaci&#243;n 
+
+</li>
+<li>Adjudicaci&#243;n fondecyt 2018 
+
+</li>
+<li>Concursos VRIO 2018 
+
+</li>
+<li>Fondart artesan&#237;a UC
+
+</li>
+<li>Proyectos relaciones interespecie 
+
+</li>
+<li>publicaci&#243;n the counterculture room 
+
+</li>
+<li>premio / resistencia gr&#225;fica
+
+</li>
+<li>publicaci&#243;n memoria chilena 
+
+</li>
+<li>inauuraci&#243;n muestra 
+
+</li>
+<li>concurso investigaci&#243;n y creaci&#243;n para acad,&#233;micos 
+
+</li>
+<li>art&#237;culo post cartel en Chile 
+
+</li>
+<li>convocatoria segundo encuentrode investigaci&#243;n y proyectos DNO UC
+
+</li>
+<li>Conferencia Knowledge &nbsp;culture and ecologies 
+
+</li>
+<li>publicaci&#243;n art&#237;culo 
+
+</li>
+<li>puente dise&#241;o empresa
+
+</li>
+<li>conferencia composing methods
+
+</li>
+<li>revista dise&#241;a cmit&#233; editorial 
+
+</li>
+<li>participaci&#243;n enedi 
+
+</li>
+<li>simposio neurociencia
+
+</li>
+<li>charla /ley de donaciones culturales 
+
+</li>
+<li>conversatorio salud
+
+</li>
+<li>reuniones bien p&#250;blico
+
+</li>
+<li>lanzamientorevista dise&#241;a No 11
+
+</li>
+<li>archivo vicente larrea
+
+</li>
+<li>premio LCA award 2017 
+
+</li>
+<li>FONDEF 25 a&#241;os + mafa
+
+</li>
+<li>publicaci&#243;n manuela garret&#243;n 
+
+</li>
+<li>investiggaci&#243;n nada en rapa nui 
+
+</li>
+<li>presentaci&#243;n libro
+
+</li>
+<li>tesis premiadas en dise&#241;o IC y magister de dise&#241;o avanzado 
+
+</li>
+<li>lanzamiento space race archaeologies 
+
+</li>
+<li>call for papers revista dise&#241;a No 12
+
+</li>
+<li>participaci&#243;n forma 2017
+
+</li>
+
+</ul>
+</li>
+
+</ul>
+</li>
+<li>Educaci&#243;n Continua 
+<ul><li>Diplomados 
+
+</li>
+<li>Cursos
+
+</li>
+<li>Workshops 
+
+</li>
+<li>Informaci&#243;n General 
+
+</li>
+
+</ul>
+</li>
+
+</ul><SCRIPT type="text/javascript">
+fold_document();
+</SCRIPT>
+</body>
+</html>
